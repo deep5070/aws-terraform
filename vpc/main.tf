@@ -35,3 +35,10 @@ module "ec2" {
 module "ssh" {
   source = "../terraform/modules/ssh_key/"
 }
+
+module "autoscaling" {
+  source         = "../terraform/modules/autoscaling/"
+  security_group = module.vpc.security_group_id
+  name_prefix    = var.name_prefix
+  public_sub     = module.vpc.public_subnet
+}
